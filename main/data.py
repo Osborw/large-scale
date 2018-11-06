@@ -1,5 +1,5 @@
-import crawling
-import text_transformation
-import link_analysis
-import ranking
-import querying
+from main import crawling
+from main import text_transformation
+from main import link_analysis
+from main import ranking
+from main import querying
