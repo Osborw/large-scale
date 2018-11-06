@@ -4,4 +4,13 @@
 
 Repo for Large-Scale Programming Indexing Project
 
-All python code should exist in 'main' directory
+## Development
+
+Using Flask and flask_restful, this application runs a server that accepts POST and GET requests from other components of the operating system.
+
+## Deployment
+
+From root directory, an example command that will run the server. It will run on your machine's port 5000:
+```
+python3 app.py
+```
