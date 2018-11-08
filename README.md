@@ -10,7 +10,8 @@ Using Flask and flask_restful, this application runs a server that accepts POST 
 
 ## Deployment
 
-From root directory, an example command that will run the server. It will run on your machine's port 5000:
+From root directory of the application, this example command will run the server. It will run on your machine's port 5000:
 ```
+pip3 install -r requirements.txt
 python3 app.py
 ```
