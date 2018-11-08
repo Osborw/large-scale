@@ -25,5 +25,8 @@ class Querying(Resource):
 			...
 		}
 		"""
+
+		docId = request.json['docId']
+
 		result = {}
 		return jsonify(result)

@@ -31,8 +31,9 @@ class TextTransformation(Resource):
 		#Connect to DB
 		#Parse out data, insert into DB
 
-		#metadata = request.json["metadata"]
-		#text = request.json["text"]
+		metadata = request.json["metadata"]
+		text = request.json["text"]
+		grams = request.json["grams"]
 
 		result = {'status': 200}
 		return jsonify(result)

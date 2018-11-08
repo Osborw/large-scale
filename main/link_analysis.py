@@ -12,6 +12,7 @@ class LinkAnalysis(Resource):
 		{
 			"url": string[],
 			"pagerank": double[]
+			"normalized_pagerank": double[]
 		}
 		"""
 		#Check to make sure data is formatted correctly
@@ -19,8 +20,9 @@ class LinkAnalysis(Resource):
 		#Connect to DB
 		#Parse out data, insert into DB
 
-		#url = request.json["url"]
-		#pagerank = request.json["pagerank"]
+		url = request.json["url"]
+		pagerank = request.json["pagerank"]
+		normalized_pagerank = request.json["normalized_pagerank"]
 
 		result = {'status': 200}
 		return jsonify(result)

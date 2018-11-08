@@ -18,9 +18,9 @@ class Crawling(Resource):
 		#Connect to DB
 		#Parse out data, insert into DB
 
-		#url = request.json['url']
-		#error_code = request.json['error_code']
-		#redirect = request.json['redirect']
+		url = request.json['url']
+		error_code = request.json['error_code']
+		redirect = request.json['redirect']
 
 		result = {'status': 200}
 		return jsonify(result)
