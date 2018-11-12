@@ -6,7 +6,7 @@ Repo for Large-Scale Programming Indexing Project
 
 ## Development
 
-Using Flask and flask_restful, this application runs a server that accepts POST and GET requests from other components of the operating system.
+Using aiohttp and Postgresql as a DB, this application runs a server that accepts POST and GET requests from other components of the operating system.
 
 ## Deployment
 
