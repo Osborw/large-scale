@@ -1,17 +1,16 @@
-from flask import Flask, request, jsonify
-from flask_restful import Resource, Api
 from aiohttp import web
 import json
 from main import data
 
-app = Flask(__name__)
-api = Api(app)
+app = web.Application()
+app.router.add_post('/crawling', data.crawling.post)
+app.router.add_post('/tt', data.text_transformation.post)
+app.router.add_post('/la', data.link_analysis.post)
 
-api.add_resource(data.crawling.Crawling, '/crawling')
-api.add_resource(data.text_transformation.TextTransformation, '/tt')
-api.add_resource(data.link_analysis.LinkAnalysis, '/la')
-api.add_resource(data.ranking.Ranking, '/ranking')
-api.add_resource(data.querying.Querying, '/querying')
+#This is technically a GET i guess, but it's not good pratice to put json in a GET request
+#Option 1: Make this a post instead and just return a lot of data
+#Option 2: Make docId a parameter in the URL instead and not have it be an array
+app.router.add_post('/querying', data.querying.get)
 
 if __name__ == "__main__":
-	app.run(debug=True)
+	web.run_app(app)

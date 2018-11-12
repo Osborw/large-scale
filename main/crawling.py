@@ -1,26 +1,24 @@
-from flask import jsonify, request
-from flask_restful import Resource, Api
+from aiohttp import web
+import psycopg2
+import json
 
-class Crawling(Resource):
+async def post(request):
+	"""
+	{
+		"url": string,
+		"error_code": int,
+		"redirect": string
+	}
+	"""
+	try:
+		request = await request.json()
+		url = request["url"]
+		error_code = request["error_code"]
+		redirect = request["redirect"]
 
-	def get(self):
-		result = {}
-		return jsonify(result)
+		response_obj = {"status": 200}
+		return web.Response(text=json.dumps(response_obj), status=200)
 
-	def post(self):
-		"""
-		{
-			"url": string
-			"error_code": int
-			"redirect": string
-		}
-		"""
-		#Connect to DB
-		#Parse out data, insert into DB
-
-		url = request.json['url']
-		error_code = request.json['error_code']
-		redirect = request.json['redirect']
-
-		result = {'status': 200}
-		return jsonify(result)
+	except Exception as e:
+		response_obj = {"status": 500, "message": "Incorrect JSON Format: " + str(e)}
+		return web.Response(text=json.dumps(response_obj), status=500)

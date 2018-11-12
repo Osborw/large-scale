@@ -1,39 +1,37 @@
-from flask import jsonify, request
-from flask_restful import Resource, Api
+from aiohttp import web
+import psycopg2
+import json
 
-class TextTransformation(Resource):
-	
-	def get(self):
-		result = {}
-		return jsonify(result)
+async def post(request):
+	"""
+	{
+		"metadata": {
+			"url": string,
+			"title": string,
+			"description": string,
+			"keywords": string[],
+			"authors": string[]
+		},
+		"text": {
+			"headings": string[],
+			"body": []
+		},
+		"grams": [{
+			"gram": string,
+			"headingfreq": double,
+			"bodyfreq": double
+		}]
+	}
+	"""
+	try:
+		request = await request.json()
+		metadata = request["metadata"]
+		text = request["text"]
+		grams = request["grams"]
 
-	def post(self):
-		"""
-		{
-			metadata: {
-				url:string,
-				title: string,
-				description: string,
-				keywords: string[],
-				authors: string[]
-			},
-			text: {
-				headings: string[],
-				body: string[]
-			},
-			grams: [{
-				gram: string,
-				headingfreq: double,
-				bodyfreq: double
-			}]
-		}
-		"""
-		#Connect to DB
-		#Parse out data, insert into DB
+		response_obj = {"status": 200}
+		return web.Response(text=json.dumps(response_obj), status=200)
 
-		metadata = request.json["metadata"]
-		text = request.json["text"]
-		grams = request.json["grams"]
-
-		result = {'status': 200}
-		return jsonify(result)
+	except Exception as e:
+		response_obj = {"status": 500, "message": "Incorrect JSON Format: " + str(e)}
+		return web.Response(text=json.dumps(response_obj), status=500)
