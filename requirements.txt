@@ -1,5 +1,11 @@
 requests
+
 flask
+
 flask_restful
+
 aiohttp
+
 psycopg2
+
+pyyaml
