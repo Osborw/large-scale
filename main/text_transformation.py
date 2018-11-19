@@ -26,7 +26,9 @@ async def post(request):
 	}
 	"""
 	try:
+		print("Recieved TT POST request from " + request.remote)
 		request = await request.json()
+
 		cur = settings.conn.cursor()
 
 		url = request["metadata"]["url"] #Doc store

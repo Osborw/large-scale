@@ -13,6 +13,7 @@ async def post(request):
 	}
 	"""
 	try:
+		print("Recieved Link Analysis POST request from " + request.remote)
 		request = await request.json()
 		url = request["url"]
 		pagerank = request["pagerank"]

@@ -1,5 +1,5 @@
 {
-	"url": "http://testing.com/",
-	"redirect": "http://wow.com/",
-	"error_code": 404
+	"url": "www.google2.com",
+	"error_code": 404,
+	"redirect": ""
 }

@@ -1,11 +1,7 @@
 requests
 
-flask
-
-flask_restful
-
 aiohttp
 
-psycopg2
+psycopg2-binary
 
 pyyaml

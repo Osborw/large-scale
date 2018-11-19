@@ -1,5 +1,5 @@
 {
-	"url": ["http://testing.com/"],
-	"pagerank": [1.0],
-	"normalized_pagerank": [1.0]
+	"url": ["www.google.com"],
+	"pagerank": [80.827],
+	"normalized_pagerank": [6]
 }

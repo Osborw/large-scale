@@ -13,6 +13,8 @@ async def post(request):
 	}
 	"""
 	try:
+
+		print("Recieved Crawling POST request from " + request.remote)
 		request = await request.json()
 		url = request["url"]
 		doc_id = hashlib.md5(url.encode('utf-8')).hexdigest()

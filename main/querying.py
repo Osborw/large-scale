@@ -26,6 +26,7 @@ async def get(request):
 	}
 	"""
 	try:
+		print("Recieved Querying POST request from " + request.remote)
 		request = await request.json()
 		cur = settings.conn.cursor()
 
