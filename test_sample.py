@@ -6,10 +6,10 @@ import os
 import aiohttp
 from main import settings
 
-settings.get_config(os.path.dirname(os.path.realpath(__file__))+"\\config\\config.yaml")
+settings.get_config(os.path.dirname(os.path.realpath(__file__))+"/config/config.yaml")
 
 def return_data(name):
-	f=open(os.path.dirname(os.path.realpath(__file__))+"\\test_helper\\"+name)
+	f=open(os.path.dirname(os.path.realpath(__file__))+"/test_helper/"+name)
 	data=f.read()
 	return data
 
