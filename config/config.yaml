@@ -1,8 +1,8 @@
 # config.yaml
 database: "large_scale"
 user: "large_scale"
-password: ""
-host: 127.0.0.3
+password: "large_scale"
+host: green-eth.cs.rpi.edu
 port: 5433
 minsize: 1
 maxsize: 5
