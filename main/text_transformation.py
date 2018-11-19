@@ -52,18 +52,18 @@ async def post(request):
 			in_title = ngram in title
 			in_description = ngram in description
 			in_keywords = ngram in keywords
-			cur.execute("SELECT 1 FROM index WHERE ngram='%s' and docid='%s';" %(ngram, doc_id))
+			cur.execute("SELECT 1 FROM "+ settings.index_table_name +" WHERE ngram='%s' and docid='%s';" %(ngram, doc_id))
 			if len(cur.fetchall()) == 0:
-				sql_statement = "INSERT INTO index\
+				sql_statement = "INSERT INTO "+ settings.index_table_name +"\
 								VALUES ('%s', '%s', '%r', '%r', '%r', '%.8f', '%.8f');" %(ngram, doc_id, in_title, in_description, in_keywords, headingfreq, bodyfreq)
 				cur.execute(sql_statement)
 
-		cur.execute("SELECT 1 FROM doc_store WHERE id='%s';" %(doc_id))
+		cur.execute("SELECT 1 FROM "+ settings.doc_table_name +" WHERE id='%s';" %(doc_id))
 		if(len(cur.fetchall())==0):
-			sql_statement = "INSERT INTO doc_store (id, url, title, description, sect_headings, paragraphs)\
+			sql_statement = "INSERT INTO "+ settings.doc_table_name +" (id, url, title, description, sect_headings, paragraphs)\
 							VALUES ('%s','%s', '%s', '%s', '%s', '%s');" %(doc_id,url, title, description, headings_string, body_string)
 		else:
-			sql_statement = "UPDATE doc_store\
+			sql_statement = "UPDATE "+ settings.doc_table_name +"\
 							SET title='%s', description='%s', sect_headings='%s', paragraphs='%s'\
 							WHERE id='%s';" %(title, description, headings_string, body_string, doc_id)
 		cur.execute(sql_statement)

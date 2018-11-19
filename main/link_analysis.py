@@ -31,15 +31,15 @@ async def post(request):
 			doc_id = hashlib.md5(url[i].encode('utf-8')).hexdigest()
 			i_pagerank = pagerank[i]
 			i_normalized_pagerank = normalized_pagerank[i]
-			cur.execute("SELECT 1 FROM doc_store WHERE id='%s';" %(doc_id))
+			cur.execute("SELECT 1 FROM "+ settings.doc_table_name +" WHERE id='%s';" %(doc_id))
 			if(len(cur.fetchall())==0):
-				sql_statement = "INSERT INTO doc_store (id, url, pagerank, norm_pagerank) VALUES ('%s','%s', %.8f, %.8f);" %(doc_id, i_url, i_pagerank, i_normalized_pagerank)
+				sql_statement = "INSERT INTO "+ settings.doc_table_name +" (id, url, pagerank, norm_pagerank) VALUES ('%s','%s', %.8f, %.8f);" %(doc_id, i_url, i_pagerank, i_normalized_pagerank)
 			else:
-				sql_statement = "UPDATE doc_store SET url='%s', pagerank=%.8f, norm_pagerank=%.8f WHERE id='%s';" %(i_url, i_pagerank, i_normalized_pagerank, doc_id)
+				sql_statement = "UPDATE "+ settings.doc_table_name +" SET url='%s', pagerank=%.8f, norm_pagerank=%.8f WHERE id='%s';" %(i_url, i_pagerank, i_normalized_pagerank, doc_id)
 			cur.execute(sql_statement)
 
 		#For debugging purposes, I like to see what the DB looks like after the request
-		cur.execute("SELECT * FROM doc_store LIMIT 15")
+		cur.execute("SELECT * FROM "+ settings.doc_table_name +" LIMIT 15")
 		db_result = cur.fetchall()
 		print(db_result)
 

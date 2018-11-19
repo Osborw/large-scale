@@ -8,17 +8,17 @@ def init_db():
 	cur = settings.conn.cursor()
 
 	#Check if doc_store table exists
-	cur.execute("SELECT to_regclass('doc_store')")
+	cur.execute("SELECT to_regclass('" + settings.doc_table_name + "')")
 	#print(cur.fetchall())
 	if cur.fetchall()[0][0] == None:
 		create_db(cur)
 		print("Initialized DBs 'doc_store' and 'index'")
 		return
-	print("DBs 'doc_store' and 'index' already initialized")
+	print("DBs 'documents' and 'index' already initialized")
 	return
 
 def create_db(cur):
-	sql_statement = "CREATE TABLE doc_store ( \
+	sql_statement = "CREATE TABLE " + settings.doc_table_name + " ( \
 						id VARCHAR PRIMARY KEY, \
 						url VARCHAR NOT NULL, \
 						pagerank real, \
@@ -33,7 +33,7 @@ def create_db(cur):
 	#print(sql_statement);
 	cur.execute(sql_statement)
 
-	sql_statement = "CREATE TABLE index ( \
+	sql_statement = "CREATE TABLE " + settings.index_table_name +" ( \
 						ngram VARCHAR NOT NULL, \
 						docid VARCHAR NOT NULL, \
 						in_title BOOLEAN NOT NULL, \

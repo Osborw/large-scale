@@ -35,7 +35,7 @@ async def get(request):
 
 		for url in urls:
 			sql_statement = "SELECT id, url, title, sect_headings, paragraphs\
-							FROM doc_store\
+							FROM "+ settings.doc_table_name +"\
 							WHERE url='%s'" %(url)
 			cur.execute(sql_statement)
 			answer = cur.fetchone()
