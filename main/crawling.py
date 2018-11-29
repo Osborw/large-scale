@@ -14,6 +14,8 @@ async def post(request):
 	"""
 	try:
 
+		cur = None
+
 		print("Recieved Crawling POST request from " + request.remote)
 		request = await request.json()
 		url = request["url"]
@@ -55,5 +57,6 @@ async def post(request):
 
 	except Exception as e:
 		print(e)
+		if cur!=None: cur.close()
 		response_obj = {"status": 500, "message": "Incorrect JSON Format: " + str(e)}
 		return web.Response(text=json.dumps(response_obj), status=500)
