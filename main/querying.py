@@ -26,6 +26,8 @@ async def get(request):
 	}
 	"""
 	try:
+		cur = None
+		
 		print("Recieved Querying POST request from " + request.remote)
 		request = await request.json()
 		cur = settings.conn.cursor()
@@ -55,5 +57,6 @@ async def get(request):
 
 	except Exception as e:
 		print(e)
+		if cur!=None: cur.close()
 		response_obj = {"status": 500, "message": "Incorrect JSON Format: " + str(e)}
 		return web.Response(text=json.dumps(response_obj), status=500)

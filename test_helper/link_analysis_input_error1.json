@@ -1,0 +1,5 @@
+{
+	"url": ["www.google.com"],
+	"pagerank": ["STRING"],
+	"normalized_pagerank": [6]
+}

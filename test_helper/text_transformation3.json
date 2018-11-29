@@ -1,0 +1,28 @@
+{
+	"metadata": {
+		"url": "www.bing1.com",
+		"title": "Bing",
+		"description": "Bing Search Engine",
+		"keywords": ["bing", "search", "lookup"],
+		"authors": ["Mr. Bing", "Mrs. Bing"]
+	},
+	"text": {
+		"headings": ["Bing Search", "Get Results", "Bing is Great"],
+		"body": ["Bing Search is great", "Fastest lookup speeds in the world", "Bing Search made by smart guys"]
+	},
+	"grams": [{
+		"gram": "lookup",
+		"headingfreq": 0.0,
+		"bodyfreq": 0.33
+	},
+	{
+		"gram": "Bing Search",
+		"headingfreq": 0.33,
+		"bodyfreq": 0.66
+	},
+	{
+		"gram": "fish",
+		"headingfreq": 0,
+		"bodyfreq": 0
+	}]
+}
