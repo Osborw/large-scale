@@ -28,31 +28,27 @@ async def get(request):
 	try:
 		cur = None
 		
-		print("Recieved Querying POST request from " + request.remote)
-		request = await request.json()
+		print("Recieved Querying GET request from " + request.remote)
+
+		url = request.rel_url.query["url"]
+
 		cur = settings.conn.cursor()
 
-		urls = request["url"]
-
-		data = []
-
-		for url in urls:
-			sql_statement = "SELECT id, url, title, sect_headings, paragraphs\
-							FROM "+ settings.doc_table_name +"\
-							WHERE url='%s'" %(url)
-			cur.execute(sql_statement)
-			answer = cur.fetchone()
-			if answer:
-				print(answer)
-				answer_resp = {"docId": answer[0], "url": answer[1], "title": answer[2], "header": answer[3], "body": answer[4]}
-				data.append(answer_resp)
-			else:
-				data.append({})
+		sql_statement = "SELECT id, url, title, sect_headings, paragraphs\
+						FROM "+ settings.doc_table_name +"\
+						WHERE url='%s'" %(url)
+		cur.execute(sql_statement)
+		answer = cur.fetchone()
+		if answer:
+			#print(answer)
+			answer_resp = {"docId": answer[0], "url": answer[1], "title": answer[2], "header": answer[3], "body": answer[4]}
+		else:
+			answer_resp = {}
 
 		settings.conn.commit()
 		cur.close()
 		response_obj = {"status": 200,
-						"data": data}
+						"data": answer_resp}
 		return web.Response(text=json.dumps(response_obj), status=200)
 
 	except Exception as e:

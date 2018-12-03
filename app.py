@@ -57,7 +57,7 @@ def init_routes(app):
 	#This is technically a GET i guess, but it's not good pratice to put json in a GET request
 	#Option 1: Make this a post instead and just return a lot of data
 	#Option 2: Make docId a parameter in the URL instead and not have it be an array
-	app.router.add_post('/querying', data.querying.get)
+	app.router.add_get('/querying', data.querying.get)
 
 #Load config.yaml settings. Can be accessed with app['config']. config.yaml is located in .\config\
 
