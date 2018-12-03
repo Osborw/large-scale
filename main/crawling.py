@@ -18,27 +18,12 @@ async def post(request):
 
 		print("Recieved Crawling POST request from " + request.remote)
 		request = await request.json()
-		url = request["url"]
-		doc_id = hashlib.md5(url.encode('utf-8')).hexdigest()
-		error_code = request["error_code"]
-		redirect = request["redirect"]
+		urls = request["urls"]
 
 		cur = settings.conn.cursor()
 
-		#feel free to add or change html error codes
-		if (int(error_code) == 403):
-			redirect_id = hashlib.md5(redirect.encode('utf-8')).hexdigest()
-
-			#Update in doc_store
-			sql_statement = "UPDATE "+ settings.doc_table_name +" SET url = '%s', id = '%s' WHERE url = '%s';" %(redirect,redirect_id,url)
-			cur.execute(sql_statement)
-
-			#Update in index
-			sql_statement = "UPDATE "+ settings.index_table_name +" SET docid = '%s' WHERE docid = '%s';" %(redirect_id, doc_id)
-			cur.execute(sql_statement)
-
-		#feel free to add or change html error codes
-		elif (int(error_code) == 404):
+		for url in urls:
+			doc_id = hashlib.md5(url.encode('utf-8')).hexdigest()
 			sql_statement = "DELETE FROM "+ settings.doc_table_name +" WHERE url = '%s';" %(url)
 			cur.execute(sql_statement)
 			sql_statement = "DELETE FROM "+ settings.index_table_name +" WHERE docid = '%s';" %(doc_id)
