@@ -30,13 +30,13 @@ async def get(request):
 		
 		print("Recieved Querying GET request from " + request.remote)
 
-		url = request.rel_url.query["url"]
+		docId = request.rel_url.query["id"]
 
 		cur = settings.conn.cursor()
 
 		sql_statement = "SELECT id, url, title, sect_headings, paragraphs\
 						FROM "+ settings.doc_table_name +"\
-						WHERE url='%s'" %(url)
+						WHERE id='%s'" %(docId)
 		cur.execute(sql_statement)
 		answer = cur.fetchone()
 		if answer:
