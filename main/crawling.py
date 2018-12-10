@@ -44,7 +44,6 @@ async def post(request):
 		#For debugging purposes, I like to see what the DB looks like after the request
 		cur.execute("SELECT * FROM "+ settings.doc_table_name +" LIMIT 15")
 		db_result = cur.fetchall()
-		print(db_result)
         
         # Here all the response needs to know is that we modified the data
 		response_obj = {"status": "Successfully modified data"}
