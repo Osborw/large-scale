@@ -15,3 +15,4 @@ From root directory of the application, this example command will run the server
 pip3 install -r requirements.txt
 python3 app.py
 ```
+
